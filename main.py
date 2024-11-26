@@ -1,12 +1,16 @@
+import statistics
 from tabulate import tabulate
 from datetime import datetime
 
 class Experiment:
-    def __init__(self, nombre, fecha, tipo, resultados):
-        self.nombre = nombre
-        self.fecha = fecha
-        self.tipo = tipo
-        self.resultados = resultados
+    def __init__(self, name, date, type_experiment, results):
+        self.name = name
+        self.date = date
+        self.type_experiment = type_experiment
+        self.results = results
+        self.avg = statistics.mean(results)
+        self.min = min(results)
+        self.max = max(results)
 
 
 # 1. Recopilación de datos experimentales: 
@@ -90,7 +94,7 @@ def manage_experiment(experimentos):
         show_experiment(experimentos)
     elif option == "3":
         print("Regresando al menu principal...") 
-        menu()
+        show_menu()
     else:
         print("ERROR: Opcion invalida. Por favor ingrese una opcion correcta.")
         return
@@ -107,7 +111,7 @@ def generate_report(experimentos):
 def export_report_to_txt(experimentos):
     pass
 
-def menu():
+def show_menu():
     experimentos = []
     
     while True:
@@ -131,4 +135,4 @@ def menu():
         else:
             print("ERROR: Opcion invalida. Por favor ingrese una opcion entre 1 y 5.") 
 
-menu()
+show_menu()
