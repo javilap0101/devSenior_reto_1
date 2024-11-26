@@ -130,7 +130,10 @@ def analysis_of_results(experiments):
         print("ERROR: Opcion invalida. Por favor ingrese una opcion correcta.")
 
 def show_analysis_of_result(experiment):
-    pass
+    print(f"\nEl Experimento: {experiment.name} tiene las siguientes estadisticas:")
+    print(f"1. Tiene un promedio de: {experiment.avg}")
+    print(f"2. El valor mínimo registrado fue de: {experiment.min}")
+    print(f"3. El valor máximo registrado fue de: {experiment.max}")
 
 def show_comparision_experiments(experiments):
     pass
