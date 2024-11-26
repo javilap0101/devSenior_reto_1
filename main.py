@@ -136,7 +136,27 @@ def show_analysis_of_result(experiment):
     print(f"3. El valor máximo registrado fue de: {experiment.max}")
 
 def show_comparision_experiments(experiments):
-    pass
+    if len(experiments) < 2:
+        print("No hay experimentos suficientes para realizar una comparación")
+    else:
+        # Encontrar el índice y el experimento con el valor mínimo más bajo
+        min_result = min(enumerate(experiments), key=lambda x: x[1].min)
+        min_index, min_experiment = min_result[0], min_result[1]
+
+        # Encontrar el índice y el experimento con el valor máximo más alto
+        max_result = max(enumerate(experiments), key=lambda x: x[1].max)
+        max_index, max_experiment = max_result[0], max_result[1]
+
+        # Encontrar el índice y el experimento con el valor promedio más alto
+        avg_result = max(enumerate(experiments), key=lambda x: x[1].avg)
+        avg_index, avg_experiment = avg_result[0], avg_result[1]
+        
+        print(f"\nEl experimento con el promedio mas alto es el # {avg_index + 1}")
+        print(f"El experimento lleva por nombre {avg_experiment.name}")
+        print(f"\nEl experimento que tuvo el valor mínimo mas bajo es el # {min_index + 1}")
+        print(f"El experimento lleva por nombre {min_experiment.name}")
+        print(f"\nEl experimento que tuvo el valor máximo mas alto es el # {max_index + 1}")
+        print(f"El experimento lleva por nombre {max_experiment.name}")
 
 # 3. Generación de informe:
 def generate_report(experimentos):
