@@ -2,26 +2,30 @@ from tabulate import tabulate
 from datetime import datetime
 
 class Experiment:
-    def __init__(self, nombre, fecha, tipo, resultados):
-        self.nombre = nombre
-        self.fecha = fecha
+    def __init__(self, tipo, fecha, nombre, resultados):
         self.tipo = tipo
+        self.fecha = fecha
+        self.nombre = nombre
         self.resultados = resultados
 
 
 # 1. Recopilación de datos experimentales: 
 def add_experiment(experimentos):
-    nombre_experimentos = ["Física", "Química", "Biología"]
-    tipos_experimentos = [["Caída Libre", "MRU", "Ley de Hooke"], ["Reacción de neutralización", "Electrólisis del agua", "Reacción ácido-base"], ["Germinación","Fotosíntesis","Reproducción"]]
+    tipos_experimentos = ["Física", "Química", "Biología"]
+    nombres_experimentos = [["Caída Libre", "MRU", "Ley de Hooke"], ["Reacción de neutralización", "Electrólisis del agua", "Reacción ácido-base"], ["Germinación","Fotosíntesis","Reproducción"]]
     
-    print("\nSeleccione el nombre del experimento: ")
-    for i, nombre in enumerate(nombre_experimentos):    
-        print(f"{i+1}. {nombre}")   # Muestra los nombres de los experimentos
-    while True: # Validación del nombre del experimento
+    tipo_experimento = None
+    fecha = None
+    nombre_experimento = None
+
+    print("\nSeleccione el tipo del experimento: ")
+    for i, tipo in enumerate(tipos_experimentos):    
+        print(f"{i+1}.{tipo}")   # Muestra los tiposde los experimentos
+    while True: # Validación del tipo del experimento
         try:
-            opcion_1 = int(input("Ingrese el número del experimento: "))
-            if 1 <= opcion_1 <= len(nombre_experimentos):
-                nombre = nombre_experimentos[opcion_1 - 1]
+            opcion_1 = int(input("Ingrese la opción del tipo del experimento realizado: "))
+            if 1 <= opcion_1 <= len(tipos_experimentos):
+                tipo_experimento = tipos_experimentos[opcion_1 - 1]
                 break
             else:    
                 print("ERROR: Opcion no valida. Intente nuevamente.")
@@ -41,14 +45,14 @@ def add_experiment(experimentos):
         except ValueError:
             print("ERROR: Formato de fecha incorrecto. Debe ser DD/MM/AAAA.")
             
-    print("\nSeleccione el tipo de experimento: ")
-    for i, tipo in enumerate(tipos_experimentos[opcion_1 - 1]):
-        print(f"{i+1}. {tipo}") # Muestra los tipos de experimentos
-    while True: # Validación del tipo de experimento
+    print("\nSeleccione el nombre del experimento: ")
+    for i, nombre in enumerate(nombres_experimentos[opcion_1 - 1]):
+        print(f"{i+1}.{nombre}") # Muestra los nombres de los experimentos
+    while True: # Validación del nombre del experimento seleccionado
         try:
-            opcion_2 = int(input("Ingrese el numero del experimento: "))
-            if 1 <= opcion_2 <= len(tipos_experimentos[opcion_1 - 1]):
-                tipo_experimento = tipos_experimentos[opcion_1 - 1][opcion_2 - 1]
+            opcion_2 = int(input("Ingrese la opción del nombre del experimento: "))
+            if 1 <= opcion_2 <= len(nombres_experimentos[opcion_1 - 1]):
+                nombre_experimento = nombres_experimentos[opcion_1 - 1][opcion_2 - 1]
                 break
             else:    
                 print("ERROR: Opcion no valida. Intente nuevamente.")
@@ -57,18 +61,20 @@ def add_experiment(experimentos):
     
     resultados_str = input("Ingrese los resultados del experimento separados por comas (p.e 1,4,6): ")
     resultados = list(map(float, resultados_str.split(",")))
-    experimento = Experiment(nombre, fecha, tipo_experimento, resultados)
+
+    # Se crea la instancia del experimento
+    experimento = Experiment(tipo_experimento, fecha, nombre_experimento, resultados)
     experimentos.append(experimento)
-    print("Experimento creado exitosamente!")
+    print("\nExperimento creado exitosamente!")
 
 
 def show_experiment(experimentos):
     if(experimentos):
         print("\nExperimentos disponibles:")
-    # Utilizar la libreria tabulate para mostrar los experimentos
-        datos = [["Experimento", "Fecha", "Tipo", "Resultados"]]
-        for experimento in experimentos:
-            datos.append([experimento.nombre, experimento.fecha.strftime("%d/%m/%Y"), experimento.tipo, ", ".join(map(str, experimento.resultados))])
+        # Utilizar la libreria tabulate para mostrar los experimentos
+        datos = [["Fecha", "Tipo", "Experimento", "Resultados"]]
+        for datos_experimento in experimentos:
+            datos.append([datos_experimento.fecha.strftime("%d/%m/%Y"), datos_experimento.tipo, datos_experimento.nombre,  ", ".join(map(str, datos_experimento.resultados))])
         # .join(map(str, experimento.resultados))])
         # La función map aplica la función str a cada elemento de la lista experimento.resultados
         # concatena los elementos de la lista experimento.resultados con un separador ","
