@@ -102,32 +102,35 @@ def manage_experiment(experimentos):
 
 # 2. Análisis de resultados:
 def analysis_of_results(experiments):
-    print("\nSeleccione una de las siguientes opciones:")
-    print("1. Cálcular estadisticas básicas")   
-    print("2. Mostrar comparación entre experimentos")
-    print("3. Regresar al menú principal")
-    option = input("Ingrese su opción: ")
-    if option == "1":    
-        print("\nSeleccione uno de los siguientes experimentos para realizar los cálculos:")
-        for i, experiment in enumerate(experiments, start=1):
-            print(f"{i}. {experiment.name}")
-        while True:
-            try:
-                analysis_option = int(input("Ingrese el número del experimento que desea analizar: "))
-                if 1 <= analysis_option <= len(experiments):
-                    show_analysis_of_result(experiments[analysis_option - 1])
-                    break
-                else:    
-                    print("ERROR: Opcion no valida. Intente nuevamente.")
-            except ValueError:
-                print("ERROR: Formato de opción incorrecto. Debe ser un número.")
-    elif option == "2":
-        show_comparision_experiments(experiments)
-    elif option == "3":
-        print("Regresando al menu principal...") 
-        show_menu()
+    if not experiments:
+        print("No hay experimentos para realizar análisis")
     else:
-        print("ERROR: Opcion invalida. Por favor ingrese una opcion correcta.")
+        print("\nSeleccione una de las siguientes opciones:")
+        print("1. Cálcular estadisticas básicas")   
+        print("2. Mostrar comparación entre experimentos")
+        print("3. Regresar al menú principal")
+        option = input("Ingrese su opción: ")
+        if option == "1":
+            print("\nSeleccione uno de los siguientes experimentos para realizar los cálculos:")
+            for i, experiment in enumerate(experiments, start=1):
+                print(f"{i}. {experiment.name}")
+            while True:
+                try:
+                    analysis_option = int(input("Ingrese el número del experimento que desea analizar: "))
+                    if 1 <= analysis_option <= len(experiments):
+                        show_analysis_of_result(experiments[analysis_option - 1])
+                        break
+                    else:    
+                        print("ERROR: Opcion no valida. Intente nuevamente.")
+                except ValueError:
+                    print("ERROR: Formato de opción incorrecto. Debe ser un número.")
+        elif option == "2":
+            show_comparision_experiments(experiments)
+        elif option == "3":
+            print("Regresando al menu principal...") 
+            show_menu()
+        else:
+            print("ERROR: Opcion invalida. Por favor ingrese una opcion correcta.")
 
 def show_analysis_of_result(experiment):
     print(f"\nEl Experimento: {experiment.name} tiene las siguientes estadisticas:")
@@ -159,10 +162,11 @@ def show_comparision_experiments(experiments):
         print(f"El experimento lleva por nombre {max_experiment.name}")
 
 # 3. Generación de informe:
-def generate_report(experimentos):
+def generate_report(experiments):
     pass
+    
 
-def export_report_to_txt(experimentos):
+def export_report_to_txt(experiments):
     pass
 
 def show_menu():
