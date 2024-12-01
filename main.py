@@ -81,7 +81,7 @@ def show_experiment(experiments):
         print("ERROR: No hay experimentos disponibles.")
    
 
-def manage_experiment(experimentos):
+def manage_experiment(experiments):
     # submenú de gestionar experimentos
     print("\nSeleccione una de las siguientes opciones:")
     print("1. Crear experimento")   
@@ -89,9 +89,9 @@ def manage_experiment(experimentos):
     print("3. Regresar al menú principal")
     option = input("Ingrese su opción: ")
     if option == "1":
-        add_experiment(experimentos)
+        add_experiment(experiments)
     elif option == "2":
-        show_experiment(experimentos)
+        show_experiment(experiments)
     elif option == "3":
         print("Regresando al menu principal...") 
         show_menu()
