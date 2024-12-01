@@ -94,7 +94,7 @@ def manage_experiment(experiments):
         show_experiment(experiments)
     elif option == "3":
         print("Regresando al menu principal...") 
-        show_menu()
+        return
     else:
         print("ERROR: Opcion invalida. Por favor ingrese una opcion correcta.")
         return
@@ -128,7 +128,7 @@ def analysis_of_results(experiments):
             show_comparision_experiments(experiments)
         elif option == "3":
             print("Regresando al menu principal...") 
-            show_menu()
+            return
         else:
             print("ERROR: Opcion invalida. Por favor ingrese una opcion correcta.")
 
