@@ -14,55 +14,55 @@ class Experiment:
 
 
 # 1. Recopilación de datos experimentales: 
-def add_experiment(experimentos):
-    nombre_experimentos = ["Física", "Química", "Biología"]
-    tipos_experimentos = [["Caída Libre", "MRU", "Ley de Hooke"], ["Reacción de neutralización", "Electrólisis del agua", "Reacción ácido-base"], ["Germinación","Fotosíntesis","Reproducción"]]
+def add_experiment(experiments):
+    type_experiments = ["Física", "Química", "Biología"]
+    name_experiments = [["Caída Libre", "MRU", "Ley de Hooke"], ["Reacción de neutralización", "Electrólisis del agua", "Reacción ácido-base"], ["Germinación","Fotosíntesis","Reproducción"]]
     
-    print("\nSeleccione el nombre del experimento: ")
-    for i, nombre in enumerate(nombre_experimentos):    
-        print(f"{i+1}. {nombre}")   # Muestra los nombres de los experimentos
+    print("\nSeleccione el tipo de experimento: ")
+    for i, type_experiment in enumerate(type_experiments):    
+        print(f"{i+1}. {type_experiment}")   # Muestra los nombres de los experimentos
     while True: # Validación del nombre del experimento
         try:
-            opcion_1 = int(input("Ingrese el número del experimento: "))
-            if 1 <= opcion_1 <= len(nombre_experimentos):
-                nombre = nombre_experimentos[opcion_1 - 1]
+            option_1 = int(input("Ingrese el número del tipo de experimento: "))
+            if 1 <= option_1 <= len(type_experiments):
+                type_experiment = type_experiments[option_1 - 1]
                 break
             else:    
-                print("ERROR: Opcion no valida. Intente nuevamente.")
+                print("ERROR: Opción no valida. Intente nuevamente.")
         except ValueError:
             print("ERROR: Formato de opcion incorrecto. Debe ser un numero.")
 
     
     while True: # Validación de la fecha del experimento
-        fecha_str = input("\nIngrese la fecha del experimento (DD/MM/AAAA): ")
+        date_str = input("\nIngrese la fecha del experimento (DD/MM/AAAA): ")
         
         try:
-            fecha = datetime.strptime(fecha_str, "%d/%m/%Y")
-            if fecha > datetime.now():
+            date = datetime.strptime(date_str, "%d/%m/%Y")
+            if date > datetime.now():
                 print("ERROR: El experimento no puede tener una fecha futura!")
             else:    
                 break
         except ValueError:
             print("ERROR: Formato de fecha incorrecto. Debe ser DD/MM/AAAA.")
             
-    print("\nSeleccione el tipo de experimento: ")
-    for i, tipo in enumerate(tipos_experimentos[opcion_1 - 1]):
-        print(f"{i+1}. {tipo}") # Muestra los tipos de experimentos
+    print("\nSeleccione el nombre del experimento: ")
+    for i, name in enumerate(name_experiments[option_1 - 1]):
+        print(f"{i+1}. {name}") # Muestra los tipos de experimentos
     while True: # Validación del tipo de experimento
         try:
-            opcion_2 = int(input("Ingrese el numero del experimento: "))
-            if 1 <= opcion_2 <= len(tipos_experimentos[opcion_1 - 1]):
-                tipo_experimento = tipos_experimentos[opcion_1 - 1][opcion_2 - 1]
+            option_2 = int(input("Ingrese el número del nombre dl experimento: "))
+            if 1 <= option_2 <= len(name_experiments[option_1 - 1]):
+                name = name_experiments[option_1 - 1][option_2 - 1]
                 break
             else:    
                 print("ERROR: Opcion no valida. Intente nuevamente.")
         except ValueError:
             print("ERROR: Formato de opcion incorrecto. Debe ser un numero.")
     
-    resultados_str = input("Ingrese los resultados del experimento separados por comas (p.e 1,4,6): ")
-    resultados = list(map(float, resultados_str.split(",")))
-    experimento = Experiment(nombre, fecha, tipo_experimento, resultados)
-    experimentos.append(experimento)
+    results_str = input("Ingrese los resultados del experimento separados por comas (p.e 1,4,6): ")
+    results = list(map(float, results_str.split(",")))
+    experimento = Experiment(name, date, type_experiment, results)
+    experiments.append(experimento)
     print("Experimento creado exitosamente!")
 
 
@@ -163,7 +163,19 @@ def show_comparision_experiments(experiments):
 
 # 3. Generación de informe:
 def generate_report(experiments):
-    pass
+    if not experiments:
+        print("No hay experimentos para generar reporte!")
+    else:
+        print("="*50)
+        print(f"Se han registrado {len(experiments)} experimentos")
+        print("="*50)
+        print("Listado de experimentos: ")
+        show_experiment(experiments)
+        print("="*50)
+        print("Comparación de experimentos: ")
+        if len(experiments) > 1:
+            show_comparision_experiments(experiments)
+        print("Reporte generado correctamente")
     
 
 def export_report_to_txt(experiments):
