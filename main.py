@@ -179,10 +179,53 @@ def generate_report(experiments):
     
 
 def export_report_to_txt(experiments):
-    pass
+    if not experiments:
+        print("No hay experimentos para exportar reporte")
+    else:
+        with open("reporte.txt", "w", encoding="utf-8") as file:
+            file.write("\n")
+            file.write("="*50)
+            file.write("\nReporte General")
+            file.write("\n")
+            file.write("="*50)
+            file.write(f"\nSe han registrado {len(experiments)} experimentos")
+            file.write("\n")
+            file.write("="*50)
+            file.write("\nListado de Experimentos: ")
+            for i, experiment in enumerate(experiments, start=1):
+                file.write(f"\nExperimento {i}")
+                file.write(f"\nTipo de Experimento: {experiment.type_experiment}")
+                file.write(f"\nNombre: {experiment.name}")
+                file.write(f"\nFecha: {experiment.date.strftime("%d/%m/%Y")}")
+                file.write(f"\nResultados: {experiment.results}")
+                
+            if len(experiments) > 1:
+                min_result = min(enumerate(experiments), key=lambda x: x[1].min)
+                min_index, min_experiment = min_result[0], min_result[1]
+
+                # Encontrar el índice y el experimento con el valor máximo más alto
+                max_result = max(enumerate(experiments), key=lambda x: x[1].max)
+                max_index, max_experiment = max_result[0], max_result[1]
+
+                # Encontrar el índice y el experimento con el valor promedio más alto
+                avg_result = max(enumerate(experiments), key=lambda x: x[1].avg)
+                avg_index, avg_experiment = avg_result[0], avg_result[1]
+                
+                file.write("\n")
+                file.write("="*50)
+                file.write(f"\nEl experimento con el promedio mas alto es el # {avg_index + 1}")
+                file.write(f"\nEl experimento lleva por nombre {avg_experiment.name}")
+                file.write(f"\nEl experimento que tuvo el valor mínimo mas bajo es el # {min_index + 1}")
+                file.write(f"\nEl experimento lleva por nombre {min_experiment.name}")
+                file.write(f"\nEl experimento que tuvo el valor máximo mas alto es el # {max_index + 1}")
+                file.write(f"\nEl experimento lleva por nombre {max_experiment.name}")
+        print("Reporte generado correctamente")
+    
+            
+            
 
 def show_menu():
-    experimentos = []
+    experiments = []
     
     while True:
         print("\nSeleccione una de las siguientes opciones:")
@@ -193,13 +236,13 @@ def show_menu():
         print("5. Salir")
         option = input("Ingrese su opcion: ")
         if option == "1":
-            manage_experiment(experimentos)
+            manage_experiment(experiments)
         elif option == "2":
-            analysis_of_results(experimentos)
+            analysis_of_results(experiments)
         elif option == "3":
-            generate_report(experimentos)
+            generate_report(experiments)
         elif option == "4":
-            export_report_to_txt(experimentos)
+            export_report_to_txt(experiments)
         elif option == "5":
             break
         else:
