@@ -66,13 +66,13 @@ def add_experiment(experiments):
     print("Experimento creado exitosamente!")
 
 
-def show_experiment(experimentos):
-    if(experimentos):
+def show_experiment(experiments):
+    if(experiments):
         print("\nExperimentos disponibles:")
     # Utilizar la libreria tabulate para mostrar los experimentos
         datos = [["Experimento", "Fecha", "Tipo", "Resultados"]]
-        for experimento in experimentos:
-            datos.append([experimento.nombre, experimento.fecha.strftime("%d/%m/%Y"), experimento.tipo, ", ".join(map(str, experimento.resultados))])
+        for experiment in experiments:
+            datos.append([experiment.name, experiment.date.strftime("%d/%m/%Y"), experiment.type_experiment, ", ".join(map(str, experiment.results))])
         # .join(map(str, experimento.resultados))])
         # La función map aplica la función str a cada elemento de la lista experimento.resultados
         # concatena los elementos de la lista experimento.resultados con un separador ","
