@@ -3,6 +3,18 @@ from tabulate import tabulate
 from datetime import datetime
 
 class Experiment:
+    """
+    Representa un experimento con sus atributos principales.
+    
+    Atributos:
+        name (str): Nombre del experimento.
+        date (datetime): Fecha del experimento.
+        type_experiment (str): Tipo de experimento (Física, Química, Biología).
+        results (list): Lista de resultados numéricos del experimento.
+        avg (float): Promedio de los resultados.
+        min (float): Valor mínimo de los resultados.
+        max (float): Valor máximo de los resultados.
+    """
     def __init__(self, name, date, type_experiment, results):
         self.name = name
         self.date = date
@@ -12,9 +24,14 @@ class Experiment:
         self.min = min(results)
         self.max = max(results)
 
-
 # 1. Recopilación de datos experimentales: 
 def add_experiment(experiments):
+    """
+    Crea un nuevo experimento y lo agrega a la lista de experimentos.
+
+    Argumentos:
+        experiments (list): Lista de experimentos existentes.
+    """
     type_experiments = ["Física", "Química", "Biología"]
     name_experiments = [["Caída Libre", "MRU", "Ley de Hooke"], ["Reacción de neutralización", "Electrólisis del agua", "Reacción ácido-base"], ["Germinación","Fotosíntesis","Reproducción"]]
     
@@ -65,9 +82,13 @@ def add_experiment(experiments):
     experiments.append(experimento)
     print("Experimento creado exitosamente!")
 
-
-
 def show_experiment(experiments):
+    """
+    Muestra todos los experimentos registrados en una tabla utilizando tabulate.
+
+    Argumentos:
+        experiments (list): Lista de experimentos existentes.
+    """
     if(experiments):
         print("\nExperimentos disponibles:")
     # Utilizar la libreria tabulate para mostrar los experimentos
@@ -81,9 +102,14 @@ def show_experiment(experiments):
     else:
         print("ERROR: No hay experimentos disponibles.")
    
-
+# submenú de gestionar experimentos
 def manage_experiment(experiments):
-    # submenú de gestionar experimentos
+    """
+    Gestiona la creación y visualización de experimentos.
+
+    Argumentos:
+        experiments (list): Lista de experimentos existentes.
+    """
     print("\nSeleccione una de las siguientes opciones:")
     print("1. Crear experimento")   
     print("2. Mostrar experimento")
@@ -100,9 +126,15 @@ def manage_experiment(experiments):
         print("ERROR: Opcion invalida. Por favor ingrese una opcion correcta.")
         return
 
-
 # 2. Análisis de resultados:
 def analysis_of_results(experiments):
+    """
+    Gestiona el análisis de los resultados de los experimentos registrados y comparación entre los mismos.
+
+    Argumentos:
+        experiments (list): Lista de experimentos registrados.
+
+    """    
     if not experiments:
         print("No hay experimentos para realizar análisis")
     else:
@@ -134,12 +166,30 @@ def analysis_of_results(experiments):
             print("ERROR: Opcion invalida. Por favor ingrese una opcion correcta.")
 
 def show_analysis_of_result(experiment):
+    """
+    Muestra las estadísticas básicas de un experimento específico (promedio, valor mínimo y valor máximo).
+
+    Args:
+        experiment (Experiment): Objeto del tipo `Experiment` que contiene los datos del experimento.
+    """
     print(f"\nEl Experimento: {experiment.name} tiene las siguientes estadisticas:")
     print(f"1. Tiene un promedio de: {experiment.avg}")
     print(f"2. El valor mínimo registrado fue de: {experiment.min}")
     print(f"3. El valor máximo registrado fue de: {experiment.max}")
 
 def show_comparision_experiments(experiments):
+    """
+    Compara los resultados de múltiples experimentos registrados.
+
+    Identifica los siguientes aspectos:
+        1. El experimento con el promedio más alto.
+        2. El experimento con el valor mínimo más bajo.
+        3. El experimento con el valor máximo más alto.
+
+    Args:
+        experiments (list): Lista de experimentos registrados.
+
+    """
     if len(experiments) < 2:
         print("No hay experimentos suficientes para realizar una comparación")
     else:
@@ -164,6 +214,18 @@ def show_comparision_experiments(experiments):
 
 # 3. Generación de informe:
 def generate_report(experiments):
+    """
+    Genera un reporte completo sobre los experimentos registrados.
+
+    El reporte incluye:
+        1. El número total de experimentos registrados.
+        2. Un listado de todos los experimentos con sus detalles.
+        3. Una comparación entre experimentos, si hay al menos dos.
+
+    Args:
+        experiments (list): Lista de experimentos registrados.
+        
+    """
     if not experiments:
         print("No hay experimentos para generar reporte!")
     else:
@@ -172,14 +234,28 @@ def generate_report(experiments):
         print("="*50)
         print("Listado de experimentos: ")
         show_experiment(experiments)
-        print("="*50)
-        print("Comparación de experimentos: ")
         if len(experiments) > 1:
+            print("="*50)
+            print("Comparación de experimentos: ")
             show_comparision_experiments(experiments)
         print("Reporte generado correctamente")
-    
 
 def export_report_to_txt(experiments):
+    """
+    Exporta un reporte detallado de los experimentos registrados a un archivo de texto.
+
+    El reporte incluye:
+        1. El número total de experimentos registrados.
+        2. Un listado detallado de todos los experimentos con sus características.
+        3. Una comparación entre experimentos (si hay más de uno), indicando:
+           - El experimento con el promedio más alto.
+           - El experimento con el valor mínimo más bajo.
+           - El experimento con el valor máximo más alto.
+
+    Args:
+        experiments (list): Lista de objetos `Experiment` registrados.
+        
+    """
     if not experiments:
         print("No hay experimentos para exportar reporte")
     else:
@@ -221,11 +297,12 @@ def export_report_to_txt(experiments):
                 file.write(f"\nEl experimento que tuvo el valor máximo mas alto es el # {max_index + 1}")
                 file.write(f"\nEl experimento lleva por nombre {max_experiment.name}")
         print("Reporte generado correctamente")
-    
-            
-            
 
 def show_menu():
+    """
+    Muestra el menú principal de la aplicación y maneja las interacciones del usuario.
+    
+    """
     experiments = []
     
     while True:
