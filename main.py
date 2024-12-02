@@ -58,12 +58,13 @@ def add_experiment(experiments):
                 print("ERROR: Opcion no valida. Intente nuevamente.")
         except ValueError:
             print("ERROR: Formato de opcion incorrecto. Debe ser un numero.")
-    
+
     results_str = input("Ingrese los resultados del experimento separados por comas (p.e 1,4,6): ")
     results = list(map(float, results_str.split(",")))
     experimento = Experiment(name, date, type_experiment, results)
     experiments.append(experimento)
     print("Experimento creado exitosamente!")
+
 
 
 def show_experiment(experiments):
