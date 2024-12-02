@@ -104,7 +104,7 @@ def manage_experiment(experiments):
 # 2. Análisis de resultados:
 def analysis_of_results(experiments):
     if not experiments:
-        print("No hay experimentos para realizar análisis")
+        print("ERROR: No hay experimentos para realizar análisis")
     else:
         print("\nSeleccione una de las siguientes opciones:")
         print("1. Cálcular estadisticas básicas")   
@@ -135,13 +135,13 @@ def analysis_of_results(experiments):
 
 def show_analysis_of_result(experiment):
     print(f"\nEl Experimento: {experiment.name} tiene las siguientes estadisticas:")
-    print(f"1. Tiene un promedio de: {experiment.avg}")
+    print(f"1. Tiene un promedio de: {experiment.avg:.2f}")
     print(f"2. El valor mínimo registrado fue de: {experiment.min}")
     print(f"3. El valor máximo registrado fue de: {experiment.max}")
 
 def show_comparision_experiments(experiments):
     if len(experiments) < 2:
-        print("No hay experimentos suficientes para realizar una comparación")
+        print("ERROR: No hay experimentos suficientes para realizar una comparación")
     else:
         # Encontrar el índice y el experimento con el valor mínimo más bajo
         min_result = min(enumerate(experiments), key=lambda x: x[1].min)
@@ -165,7 +165,7 @@ def show_comparision_experiments(experiments):
 # 3. Generación de informe:
 def generate_report(experiments):
     if not experiments:
-        print("No hay experimentos para generar reporte!")
+        print("ERROR: No hay experimentos para generar reporte!")
     else:
         print("="*50)
         print(f"Se han registrado {len(experiments)} experimentos")
@@ -181,7 +181,7 @@ def generate_report(experiments):
 
 def export_report_to_txt(experiments):
     if not experiments:
-        print("No hay experimentos para exportar reporte")
+        print("ERROR: No hay experimentos para exportar reporte")
     else:
         with open("reporte.txt", "w", encoding="utf-8") as file:
             file.write("\n")
@@ -194,7 +194,7 @@ def export_report_to_txt(experiments):
             file.write("="*50)
             file.write("\nListado de Experimentos: ")
             for i, experiment in enumerate(experiments, start=1):
-                file.write(f"\nExperimento {i}")
+                file.write(f"\n\nExperimento {i}")
                 file.write(f"\nTipo de Experimento: {experiment.type_experiment}")
                 file.write(f"\nNombre: {experiment.name}")
                 file.write(f"\nFecha: {experiment.date.strftime("%d/%m/%Y")}")
