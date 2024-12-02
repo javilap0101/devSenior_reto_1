@@ -1,0 +1,13 @@
+
+==================================================
+Reporte General
+==================================================
+Se han registrado 1 experimentos
+==================================================
+Listado de Experimentos: 
+
+Experimento 1
+Tipo de Experimento: Física
+Nombre: Caída Libre
+Fecha: 01/01/1000
+Resultados: [1.0, 1.0, 1.0, 1.0]
