@@ -275,6 +275,9 @@ def export_report_to_txt(experiments):
                 file.write(f"\nNombre: {experiment.name}")
                 file.write(f"\nFecha: {experiment.date.strftime("%d/%m/%Y")}")
                 file.write(f"\nResultados: {experiment.results}")
+                file.write(f"\nPromedio: {experiment.avg}")
+                file.write(f"\nValor mínimo: {experiment.min}")
+                file.write(f"\nValor máximo: {experiment.results}")
                 
             if len(experiments) > 1:
                 min_result = min(enumerate(experiments), key=lambda x: x[1].min)
